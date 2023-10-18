@@ -26,6 +26,13 @@ async function run() {
 
     const database = client.db("userDB");
     const users = database.collection("users");
+    const netflixCollection = client.db("brandDB").collection("Netflix");
+
+    app.get("/netflix", async (req, res) => {
+      const cursor = netflixCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
 
     app.post("/register", async (req, res) => {
       const newUser = req.body;
