@@ -61,6 +61,36 @@ async function run() {
       const result = await netflixCollection.findOne(query);
       res.send(result);
     });
+    app.get("/disney/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await disneyCollection.findOne(query);
+      res.send(result);
+    });
+    app.get("/warnerbros/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await warnerbrosCollection.findOne(query);
+      res.send(result);
+    });
+    app.get("/spotify/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await spotifyCollection.findOne(query);
+      res.send(result);
+    });
+    app.get("/amazonprime/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await amazonprimeCollection.findOne(query);
+      res.send(result);
+    });
+    app.get("/sony/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await sonyCollection.findOne(query);
+      res.send(result);
+    });
 
     app.get("/netflix", async (req, res) => {
       const cursor = netflixCollection.find();
@@ -127,6 +157,32 @@ async function run() {
       const product = req.body;
       console.log(product);
       const result = await sonyCollection.insertOne(product);
+      res.send(result);
+    });
+
+    app.put("/neflixput/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateProduct = req.body;
+
+      const product = {
+        $set: {
+          brand: updateProduct.brand,
+          name: updateProduct.name,
+          image: updateProduct.image,
+          price: updateProduct.price,
+          type: updateProduct.type,
+          description: updateProduct.description,
+          rating: updateProduct.rating,
+        },
+      };
+
+      const result = await netflixCollection.updateOne(
+        filter,
+        product,
+        options
+      );
       res.send(result);
     });
 
