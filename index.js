@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
 const app = express();
 const port = process.env.PORT || 5001;
@@ -34,6 +34,33 @@ async function run() {
       .collection("amazonprime");
     const spotifyCollection = client.db("brandDB").collection("spotify");
     const sonyCollection = client.db("brandDB").collection("sony");
+    const productStorage = client.db("brandDB").collection("productstorage");
+
+    app.post("/product", async (req, res) => {
+      const products = req.body;
+      console.log(products);
+      const result = await productStorage.insertOne(products);
+      res.send(result);
+    });
+
+    app.delete("/products/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await productStorage.deleteOne(query);
+      res.send(result);
+    });
+
+    app.get("/products", async (req, res) => {
+      const cursor = productStorage.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+    app.get("/netflix/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await netflixCollection.findOne(query);
+      res.send(result);
+    });
 
     app.get("/netflix", async (req, res) => {
       const cursor = netflixCollection.find();
@@ -66,11 +93,6 @@ async function run() {
       res.send(result);
     });
 
-    app.post("/register", async (req, res) => {
-      const user = req.body;
-      const result = await users.insertOne(user);
-      res.send(result);
-    });
     app.post("/netflixpost", async (req, res) => {
       const product = req.body;
       console.log(product);
