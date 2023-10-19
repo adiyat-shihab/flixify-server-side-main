@@ -45,43 +45,63 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
+    app.get("/spotify", async (req, res) => {
+      const cursor = spotifyCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+    app.get("/warnerbros", async (req, res) => {
+      const cursor = warnerbrosCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+    app.get("/sony", async (req, res) => {
+      const cursor = sonyCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+    app.get("/amazonprime", async (req, res) => {
+      const cursor = amazonprimeCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
 
     app.post("/register", async (req, res) => {
       const user = req.body;
       const result = await users.insertOne(user);
       res.send(result);
     });
-    app.post("/netflix", async (req, res) => {
+    app.post("/netflixpost", async (req, res) => {
       const product = req.body;
       console.log(product);
       const result = await netflixCollection.insertOne(product);
       res.send(result);
     });
-    app.post("/disney", async (req, res) => {
+    app.post("/disneypost", async (req, res) => {
       const product = req.body;
       console.log(product);
       const result = await disneyCollection.insertOne(product);
       res.send(result);
     });
-    app.post("/warnerbros", async (req, res) => {
+    app.post("/warnerbrospost", async (req, res) => {
       const product = req.body;
       console.log(product);
       const result = await warnerbrosCollection.insertOne(product);
       res.send(result);
     });
-    app.post("/amazonprime", async (req, res) => {
+    app.post("/amazonprimepost", async (req, res) => {
       const product = req.body;
       console.log(product);
       const result = await amazonprimeCollection.insertOne(product);
       res.send(result);
     });
-    app.post("/spotify", async (req, res) => {
+    app.post("/spotifypost", async (req, res) => {
       const product = req.body;
       console.log(product);
       const result = await spotifyCollection.insertOne(product);
       res.send(result);
     });
-    app.post("/sony", async (req, res) => {
+    app.post("/sonypost", async (req, res) => {
       const product = req.body;
       console.log(product);
       const result = await sonyCollection.insertOne(product);
