@@ -185,6 +185,123 @@ async function run() {
       );
       res.send(result);
     });
+    app.put("/warnerbrosput/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateProduct = req.body;
+
+      const product = {
+        $set: {
+          brand: updateProduct.brand,
+          name: updateProduct.name,
+          image: updateProduct.image,
+          price: updateProduct.price,
+          type: updateProduct.type,
+          description: updateProduct.description,
+          rating: updateProduct.rating,
+        },
+      };
+
+      const result = await warnerbrosCollection.updateOne(
+        filter,
+        product,
+        options
+      );
+      res.send(result);
+    });
+    app.put("/disneyput/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateProduct = req.body;
+
+      const product = {
+        $set: {
+          brand: updateProduct.brand,
+          name: updateProduct.name,
+          image: updateProduct.image,
+          price: updateProduct.price,
+          type: updateProduct.type,
+          description: updateProduct.description,
+          rating: updateProduct.rating,
+        },
+      };
+
+      const result = await disneyCollection.updateOne(filter, product, options);
+      res.send(result);
+    });
+    app.put("/spotifyput/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateProduct = req.body;
+
+      const product = {
+        $set: {
+          brand: updateProduct.brand,
+          name: updateProduct.name,
+          image: updateProduct.image,
+          price: updateProduct.price,
+          type: updateProduct.type,
+          description: updateProduct.description,
+          rating: updateProduct.rating,
+        },
+      };
+
+      const result = await spotifyCollection.updateOne(
+        filter,
+        product,
+        options
+      );
+      res.send(result);
+    });
+    app.put("/amazonprimeput/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateProduct = req.body;
+
+      const product = {
+        $set: {
+          brand: updateProduct.brand,
+          name: updateProduct.name,
+          image: updateProduct.image,
+          price: updateProduct.price,
+          type: updateProduct.type,
+          description: updateProduct.description,
+          rating: updateProduct.rating,
+        },
+      };
+
+      const result = await amazonprimeCollection.updateOne(
+        filter,
+        product,
+        options
+      );
+      res.send(result);
+    });
+    app.put("/sonyput/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateProduct = req.body;
+
+      const product = {
+        $set: {
+          brand: updateProduct.brand,
+          name: updateProduct.name,
+          image: updateProduct.image,
+          price: updateProduct.price,
+          type: updateProduct.type,
+          description: updateProduct.description,
+          rating: updateProduct.rating,
+        },
+      };
+
+      const result = await sonyCollection.updateOne(filter, product, options);
+      res.send(result);
+    });
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
